@@ -20,13 +20,8 @@ int** permute(int* nums, int numsSize, int* returnSize, int** returnColumnSizes)
 	arr = malloc(sizeof(int *) * 6);
 	answer = malloc(sizeof(int *) * 720);
 
-	for(int i=0; i<n; i++){ //첫번째 원소 정해주기
-		arr[idx++]=nums[i];
-		used[i]=1;
-		backtrack(nums, used, n);
-		idx = 0;
-		used[i]=0;
-	}
+	backtrack(nums, used, n);
+
 	*returnSize = cnt;
 	*returnColumnSizes = malloc(sizeof(int) * cnt);
 	for(int i=0; i<cnt; i++) (*returnColumnSizes)[i] = n;
@@ -41,13 +36,13 @@ void backtrack(int* nums, int* used, int n){
 		save(nums, n);
 		return;
 	}
-	for(int j=0; j<n; j++){ //다음에 올 원소 찾아서 넣기
+	for(int j=0; j<n; j++){ //원소 찾아서 넣기
 		if(!used[j]){
 			arr[idx++] = nums[j];
 			used[j] = 1; //j번째 수 사용체크
 			backtrack(nums, used, n);
 			used[j] = 0;
-			idx--; //재귀가 들어간 만큼 idx도 --해주기
+            idx--; //재귀가 들어간 만큼 idx도 --해주기
 		}
 	}
 }
@@ -57,7 +52,6 @@ void backtrack(int* nums, int* used, int n){
 		return;
 	}
 */
-
 void save(int* nums, int n){
 	int* copy = malloc(sizeof(int) * n);
 
